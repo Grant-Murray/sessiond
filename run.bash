@@ -1,11 +1,18 @@
 #!/bin/bash
 
-# to generate a random key use:
-# hexdump -n64 -v -e '1/1 "%.2x"' < /dev/urandom
+# This is a convenience script for starting the sessiond server. It should only be used in isolated test environments.
+# In production environments the SERVERKEY should be stored securely and entered on the terminal at startup.
 
-DBSOURCE="user=glm1 password='with spaces' host=localhost port=5432 sslmode=disable"
-SERVERKEY=c3efc2d599734b0b7488514f5bf393a7869324c0d65f27cb9d569b466d86d03f3974091e52a044a0b40c30eecf74709f3a881da3e17a9deef46ad7bd72fe308a
+# to generate a random key use: hexdump -n64 -v -e '1/1 "%.2x"' < /dev/urandom
 
-echo -e "$DBSOURCE\n$SERVERKEY" | go run session.go
+cd $GOPATH/src/github.com/Grant-Murray/sessiond
 
+killall --quiet sessiond
 
+go clean
+go install || exit 1
+
+DBSOURCE="user=postgres password='with spaces' dbname=sessdb host=localhost port=5432 sslmode=disable"
+SERVERKEY=fa1725ba8034485170912d8c29d4ef118f3fddd43e21437f0ee167835921b786d4bc6f52027fb858e6a138d6dfa1875d4ec12488464af3dbe79984bc23ffdece
+
+echo -e "$DBSOURCE\n$SERVERKEY" | sessiond &

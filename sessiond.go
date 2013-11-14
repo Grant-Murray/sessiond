@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	session.Configure("")
+	session.Configure()
 	// session.log is created in plog-pg-schema.sql
 	err := logdb.Initialize(session.Conf.DatabaseHandle, "", "INSERT INTO session.log (entered, msg, level) VALUES (now(), $1, $2)")
 	if err != nil {
