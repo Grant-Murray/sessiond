@@ -2,6 +2,7 @@ package main
 
 import (
   "crypto/tls"
+  "flag"
   "fmt"
   "github.com/Grant-Murray/session"
   "net"
@@ -11,6 +12,8 @@ import (
 func main() {
 
   var err error
+
+  flag.Parse()
 
   var tlsc tls.Config
   tlsc.NextProtos = []string{"http/1.1"}
