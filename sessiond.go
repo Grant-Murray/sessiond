@@ -14,6 +14,7 @@ func main() {
   var err error
 
   flag.Parse()
+  session.LoadConfig()
 
   var tlsc tls.Config
   tlsc.NextProtos = []string{"http/1.1"}
