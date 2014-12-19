@@ -1,12 +1,12 @@
 package main
 
 import (
+	"code.grantmurray.com/session"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
 	"flag"
 	"fmt"
-	"github.com/Grant-Murray/session"
 	"net"
 	"net/http"
 )

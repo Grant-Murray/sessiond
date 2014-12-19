@@ -8,7 +8,7 @@
 #   or
 #     openssl rand -hex 64
 
-cd $GOPATH/src/github.com/Grant-Murray/sessiond
+cd $GOPATH/src/code.grantmurray.com/sessiond
 LOGDIR="/tmp/sessiond.glog"
 
 killall --quiet sessiond
@@ -19,7 +19,7 @@ go clean
 go install || exit 1
 
 # execute the session-pg-schema.sql
-cd $GOPATH/src/github.com/Grant-Murray/session
+cd $GOPATH/src/code.grantmurray.com/session
 PSQL="psql --username=postgres --dbname=sessdb"
 $PSQL -c 'DROP SCHEMA IF EXISTS session CASCADE;'
 $PSQL -c 'DROP ROLE IF EXISTS sessionr;'
